@@ -28,6 +28,10 @@
      It looks as if without optimization, x and y are assigned and then
      y is printed. However, with optimization, it seems like the value
      is just calculated and then printed.
+
+     Overall, when we set the compiler to optimize the code, it does not store
+     values in locations which represent variables if the variables are not used
+     later, rather it just uses the values where they are needed in the code.
 */
 
 #include <stdio.h>
