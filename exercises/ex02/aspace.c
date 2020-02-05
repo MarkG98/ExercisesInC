@@ -10,9 +10,9 @@ Questions
 
 5. I can confirm that the stack grows downward. The address of
    the local variable var2 in main is 0x7fff5532656c which is larger
-   than the variable created next which is at 0x7fff55326544.
+   than the variable created next (x) which is at 0x7fff55326544.
 
-6. The two chunks of size 26 bytes are 48 bytes apart (the sum of their allocation sizes).
+6. The two chunks of size 6 bytes are 32 bytes apart.
 
 */
 
@@ -35,8 +35,8 @@ int main ()
     void *p2 = malloc(128); // for question 4
     char *s = "Hello, World";
 
-    void *p3 = malloc(26); // for question 6
-    void *p4 = malloc(26); // for question 6
+    void *p3 = malloc(6); // for question 6
+    void *p4 = malloc(6); // for question 6
 
     printf ("Address of main is %p\n", main);
     printf ("Address of var1 is %p\n", &var1);
