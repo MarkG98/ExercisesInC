@@ -25,13 +25,13 @@ int get_numbers(int* numbers)
     char numBuff[BUFF_SIZE];
     int j = 0;
 
-    printf("Welcome to the adding machine! Enter up to %i numbers each\nwith max."
-           "length %i and hit Control-D when you are done to add them up!\n\n",MAX_NUMBERS,BUFF_SIZE-2);
+    printf("Welcome to the adding machine! Enter up to %i numbers each\nwith max "
+           "length %i characters and hit Control-D when you are done to add them up!\n\n",MAX_NUMBERS,BUFF_SIZE-2);
 
     while(fgets(numBuff, sizeof(numBuff), stdin) != NULL)
     {
 
-        int len = strlen(numBuff);
+        size_t len = strlen(numBuff);
 
         if (numBuff[len - 1] != '\n')
         {
