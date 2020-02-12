@@ -33,8 +33,25 @@ s: string
 returns: string
 */
 char *reverse_string(char *s) {
-    //TODO: Fill this in.
-    return "";
+
+    // Get length of string
+    size_t length = strlen(s);
+
+    // Allocate memory on heap size of string
+    char* res = (char*) malloc(length);
+
+    // Copy string into res
+    strcpy(res, s);
+
+    // Iterate through res and assign characters
+    // to characters iterative backwards through s
+    for (size_t i = 0; i < length; i++)
+    {
+      res[i] = s[length - i - 1];
+    }
+
+    // Return pointer to res array on the heap
+    return res;
 }
 
 /* ctoi: Converts a character to integer.
@@ -53,13 +70,14 @@ i: integer 0 to 9
 returns: character '0' to '9'
 */
 char itoc(int i) {
-    //TODO: Fill this in, with an appropriate assertion.
-    return '0';
+    int result = i + '0';
+    assert(isdigit(result));
+    return result;
 }
 
 /* add_digits: Adds two decimal digits, returns the total and carry.
 
-For example, if a='5', b='6', and carry='1', the sum is 12, so
+For example, if a='5', b='6', and c='1', the sum is 12, so
 the output value of total should be '2' and carry should be '1'
 
 a: character '0' to '9'
@@ -70,7 +88,23 @@ carry: pointer to char
 
 */
 void add_digits(char a, char b, char c, char *total, char *carry) {
-    //TODO: Fill this in.
+    // Convert a, b, and c to integers
+    int x = ctoi(a);
+    int y = ctoi(b);
+    int c_in = ctoi(c);
+
+    // Add a, b, and c
+    int sum = x + y + c_in;
+
+    // Find the carryout (10s digit)
+    int c_out = sum / 10;
+
+    // Find the total (ones digit)
+    int tot = sum % 10;
+
+    // Assign
+    *total = itoc(tot);
+    *carry = itoc(c_out);
 }
 
 /* Define a type to represent a BigInt.
@@ -205,6 +239,6 @@ int main (int argc, char *argv[])
 
     //TODO: When you have the first three functions working,
     //      uncomment the following, and it should work.
-    // test_add_bigint();
+    test_add_bigint();
     return 0;
 }
