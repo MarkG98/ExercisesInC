@@ -20,6 +20,8 @@ char tracks[][80] = {
     "Flamenco Sketches"
 };
 
+// Buffer for error string
+char error_buff[ERROR_BUFF];
 
 // Finds all tracks that contain the given string.
 //
@@ -39,8 +41,6 @@ void find_track(char search_for[])
 // Prints track number and title.
 void find_track_regex(char pattern[])
 {
-    // Buffer for error string
-    char error_buff[ERROR_BUFF];
 
     for (int i=0; i<NUM_TRACKS; i++)
     {
