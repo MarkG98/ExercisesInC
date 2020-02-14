@@ -38,7 +38,7 @@ char *reverse_string(char *s) {
     size_t length = strlen(s);
 
     // Allocate memory on heap size of string
-    char* res = (char*) malloc(length);
+    char* res = (char*) malloc(length + 1);
 
     // Copy string into res
     strcpy(res, s);
