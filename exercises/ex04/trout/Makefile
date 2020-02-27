@@ -9,3 +9,6 @@ main.o: main.c trout.h util.h
 
 util.o: util.c util.h
 	gcc -c -Wall util.c -o util.o
+
+clean:
+	rm *.o
