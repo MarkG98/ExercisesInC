@@ -10,5 +10,8 @@ main.o: main.c trout.h util.h
 util.o: util.c util.h
 	gcc -c -Wall util.c -o util.o
 
+test_util: test_util.c util.c util.h minunit_util.h
+	gcc test_util.c util.c -o test_util
+
 clean:
 	rm *.o
