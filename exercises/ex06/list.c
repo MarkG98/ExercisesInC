@@ -54,8 +54,27 @@ void print_list(Node **list) {
 * returns: int or -1 if the list is empty
 */
 int pop(Node **list) {
-    // FILL THIS IN!
-    return 0;
+
+    // Set current to the current head of the list
+    Node *current = *list;
+
+    // If head is NULL, list is empty
+    if (current == NULL)
+    {
+      return -1;
+    }
+
+    // Store value of head node
+    int val = current->val;
+
+    // Set the head to the second node
+    *list = current->next;
+
+    // Free the current head
+    free(current);
+
+    // Return zero
+    return val;
 }
 
 
@@ -65,7 +84,18 @@ int pop(Node **list) {
 * val: value to add
 */
 void push(Node **list, int val) {
-    // FILL THIS IN!
+
+    // Make new node
+    Node *new = make_node(val, NULL);
+
+    // Set current to the current head of the head of the list
+    Node *current = *list;
+
+    // Make new->next be the second element in list
+    new->next = current->next;
+
+    // Make list double pointer point to the new node
+    *list = new;
 }
 
 
