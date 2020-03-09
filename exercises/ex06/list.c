@@ -70,7 +70,7 @@ int pop(Node **list) {
     // Set the head to the second node
     *list = current->next;
 
-    // Free the current head
+    // Free the current head (should I do this?)
     free(current);
 
     // Return zero
@@ -92,7 +92,7 @@ void push(Node **list, int val) {
     Node *current = *list;
 
     // Make new->next be the second element in list
-    new->next = current->next;
+    new->next = current;
 
     // Make list double pointer point to the new node
     *list = new;
@@ -109,7 +109,45 @@ void push(Node **list, int val) {
 * returns: number of nodes removed
 */
 int remove_by_value(Node **list, int val) {
-    // FILL THIS IN!
+
+    // Set current to the current head of the list
+    Node *current = *list;
+
+    // If the node to remove is the first, call
+    // pop on the list.
+    if (current->val == val)
+    {
+      pop(list);
+      return 1;
+    }
+
+    // Iterate through the nodes until the
+    // desired value is found or the end of
+    // the list is reached.
+    while(current->next != NULL)
+    {
+      if(current->next->val == val)
+      {
+        // Set tmp pointer to node to remove
+        Node *tmp = current->next;
+
+        // Skip node to be deleted with pointer on
+        // current node
+        current->next = current->next->next;
+
+        // Free the node to be deleted
+        free(tmp);
+
+        // Return that we deleted one node
+        return 1;
+      }
+
+      // Iterate through nodes
+      current = current->next;
+    }
+
+    // Return that we removed no nodes if value
+    // is not present in the list
     return 0;
 }
 
