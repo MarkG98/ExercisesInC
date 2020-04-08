@@ -1,3 +1,13 @@
+/*
+    Program to create a word -> frequency hash table.
+    To run type 'make word_count' to compile and then
+    type './word_count Moby.txt' to run on the text file
+    in the directory.
+
+    Author: Mark Goldwater
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <glib.h>
