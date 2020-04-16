@@ -19,6 +19,7 @@ Based on an example in Head First C.
 #include <signal.h>
 
 int score = 0;
+int keep_running = 1;
 
 /* Set up a signal handler.
 
@@ -44,8 +45,7 @@ void end_game(int sig)
 /* Signal handler: Notify the user and raise SIGINT.
 */
 void times_up(int sig) {
-    puts("\nTIME'S UP!");
-    raise(SIGINT);
+    keep_running = 0;
 }
 
 int main(void) {
@@ -70,8 +70,17 @@ int main(void) {
         // set (or reset) the alarm
         alarm(5);
 
-        // get the answer
-	    char *ret = fgets(txt, 4, stdin);
+        // If alarm goes off lower 'keep_going' flag which will end the game
+        // after this question. if you responsd in time continue the program
+        // and start the new loop which will reset alarm(5)
+        while(1)
+        {
+	         char *ret = fgets(txt, 4, stdin);
+           if(ret)
+           {
+              break;
+           }
+        }
         answer = atoi(txt);
 
         // check the answer
@@ -82,6 +91,13 @@ int main(void) {
             printf("\nWrong!\n");
         }
         printf("Score: %i\n", score);
+
+        // End the game if 'keep_running' flag is lowered
+        if(!keep_running)
+        {
+            end_game(0);
+        }
+
     }
     return 0;
 }
