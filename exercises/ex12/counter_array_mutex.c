@@ -5,15 +5,18 @@ License: GNU GPLv3
 
 Question 2: Synchronization errors DO occur. There were 29305 errors in the
             task array when I ran the program.
-Question 4: The "real" times for counter_array.c and counter_array_mutex.c are
-            0.089s and 0.334s respectively. That's about a 375% increase!
+
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include "mutex.h"
 
 #define NUM_CHILDREN 2
+
+// Make mutex
+static Mutex *lock;
 
 void perror_exit(char *s)
 {
@@ -77,7 +80,10 @@ void perform_task(int task_number) {
 
 void child_code(Shared *shared)
 {
+    // Protect printf
+    mutex_lock(lock);
     //printf("Starting child at counter %d\n", shared->counter);
+    mutex_unlock(lock);
 
     while (1) {
         // check if we're done
@@ -85,6 +91,8 @@ void child_code(Shared *shared)
             return;
         }
 
+        // Lock access to shared array and printf
+        mutex_lock(lock);
         // get the next task
         int task_number = shared->counter;
         shared->array[shared->counter]++;
@@ -94,6 +102,7 @@ void child_code(Shared *shared)
         if (task_number % 10000 == 0) {
             //printf("%d\n", task_number);
         }
+        mutex_unlock(lock);
 
         // go off and do the task
         perform_task(task_number);
@@ -122,6 +131,9 @@ void check_array(Shared *shared)
 
 int main()
 {
+    // Create mutex
+    lock = make_mutex();
+
     int i;
     pthread_t child[NUM_CHILDREN];
 
