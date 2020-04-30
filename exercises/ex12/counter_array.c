@@ -1,8 +1,10 @@
-/* Example code for Think OS.
+ /* Example code for Think OS.
 
 Copyright 2014 Allen Downey
 License: GNU GPLv3
 
+Question 2: Synchronization errors DO occur. There were 29305 errors in the
+            task array when I ran the program.
 */
 
 #include <stdio.h>
