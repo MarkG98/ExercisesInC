@@ -3,6 +3,15 @@
 Copyright 2014 Allen Downey
 License: GNU GPLv3
 
+Question 2: The final value of the counter is correct, but the intermediary
+            values that are being printed are not. (Thread diagram in repo)
+Question 3: When I increase the number of children to 20, there is clear
+            evidence that threads are running concurrently because there are
+            clear synchronization errors in the printing of intermediary values.
+            The counter prints "0, 0, 2, 0, 0, ..." which shows that the threads
+            are not properly synchronized when printing the current value of the
+            counter (Reader/Writer problem).
+
 */
 
 #include <stdio.h>
